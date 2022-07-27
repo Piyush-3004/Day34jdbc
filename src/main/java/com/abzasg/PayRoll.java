@@ -3,12 +3,25 @@ package com.abzasg;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Enumeration;
 
 public class PayRoll {
-
+	
+//	private PreparedStatement employeePayrollDataStatement;
+//	public static PayRoll payRoll ;	
+//	private PayRoll() {
+//		
+//	}
+	
+//	public static PayRoll getInstance() {
+//		if(payRoll == null)
+//			payRoll = new PayRoll();
+//		return payRoll;
+//	}
 	public static void main(String[] args) throws SQLException{
 		String jdbcUrl = "jdbc:mysql://localhost:3306";
 		String userName ="root";
@@ -27,6 +40,31 @@ public class PayRoll {
 		listDrivers();
 	}
 	
+		///////////////////   Uc 2    ////////////////////////
+	public static void retriveData() throws SQLException{
+		Connection connect = null;
+		try {
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "root");
+		Statement stmt = connect.createStatement();
+		ResultSet res = stmt.executeQuery("select * from employee_payroll");	
+		
+		
+		while (res.next()) {
+			System.out.println(res.getString(1) + " " + res.getString(2) + " " + res.getString(3) + " "
+					+ res.getString(4) + " " + res.getString(5) + " " + res.getDouble(6) + " " + res.getDouble(7) + " "
+					+ res.getDouble(8) + " " + res.getDouble(9) + " " + res.getDouble(10)+ " "+res.getDate(11));
+		}
+		
+		} catch (SQLException e) {
+			System.out.println("unable to connect");
+		} finally {
+			connect.close();
+		}
+	}
+	
+	
+	
+	///////////////////////    Uc 1    //////////////////////
 	
 	public static void createPayrollServiceDatabase() throws SQLException{
 		Connection connect = null;
