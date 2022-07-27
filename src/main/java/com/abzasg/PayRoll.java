@@ -41,7 +41,26 @@ public class PayRoll {
 		listDrivers();
 	}
 	
-	//////////////////////    Uc 4    /////////////////////////
+	/////////////////////     Uc 5    /////////////////////
+	public static void retriveFromPerticularDate() throws SQLException{
+		Connection connect = null;
+		try {
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/AddressBookService", "root", "root");
+			PreparedStatement pStmt = connect.prepareStatement("select * from employee_payroll where date between ? and ?");
+			pStmt.setString(1, "2020-04-15");
+			pStmt.setString(2, "2022-04-15");
+			pStmt.execute();
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			connect.close();
+		}
+
+	}
+	
+	
+	
+	/////////////////////    Uc 4    /////////////////////////
 	public static void updateSalaryWithPreparedStatement() throws SQLException{
 		Connection connect = null;
 		try {
