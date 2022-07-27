@@ -39,6 +39,22 @@ public class PayRoll {
 		}
 		listDrivers();
 	}
+	 //////////////////////    Uc 3    ///////////////////////////
+	public static void updateSalary() throws SQLException{
+		Connection connect = null;
+		try {
+		connect = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "root");
+		Statement stmt = connect.createStatement();
+		stmt.execute("update employee_payroll set basic_pay =3000000.00 where name ='terisa");		
+		
+		} catch (SQLException e) {
+			System.out.println("unable to connect");
+		} finally {
+			connect.close();
+		}
+	}
+	
+	
 	
 		///////////////////   Uc 2    ////////////////////////
 	public static void retriveData() throws SQLException{
