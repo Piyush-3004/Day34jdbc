@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Enumeration;
+import java.util.Scanner;
 
 public class PayRoll {
 	
@@ -39,7 +40,25 @@ public class PayRoll {
 		}
 		listDrivers();
 	}
-	 //////////////////////    Uc 3    ///////////////////////////
+	
+	//////////////////////    Uc 4    /////////////////////////
+	public static void updateSalaryWithPreparedStatement() throws SQLException{
+		Connection connect = null;
+		try {
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/AddressBookService", "root", "root");
+			PreparedStatement pStmt = connect.prepareStatement("update employee_payroll set basic_pay = 3000000.00 where name =?;");
+			pStmt.setString(1, "terisa");
+			pStmt.execute();
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			connect.close();
+		}
+
+	}
+		
+	
+	//////////////////////    Uc 3    ///////////////////////////
 	public static void updateSalary() throws SQLException{
 		Connection connect = null;
 		try {
